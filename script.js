@@ -29,70 +29,71 @@ function handleChatStep(input) {
     
     switch (chatStep) {
         case 0:
-            botMessage.textContent = "Quel est votre projet par rapport à notre expertise ? Est-ce la remise aux normes d'électricité, changement de tableau électrique, changement de prise, etc. ?";
+            botMessage.textContent = "Bonjour et bienvenue chez EDS Énergie Sud ! 😊 Je suis là pour vous aider avec votre projet. Pour commencer, pourriez-vous me dire en quelques mots quel est votre projet ?";
             chatStep++;
             break;
         case 1:
-            formData.projectType = input;
-            if (input.toLowerCase().includes("prise")) {
-                botMessage.textContent = "Combien de prises souhaitez-vous changer ?";
-            } else if (input.toLowerCase().includes("luminaire")) {
-                botMessage.textContent = "Combien de luminaires souhaitez-vous changer ? Sont-ils extérieurs ou intérieurs ?";
-            } else if (input.toLowerCase().includes("plomberie")) {
-                botMessage.textContent = "Pour quelle pièce est-ce ? Salle de bain, WC, cuisine, cellier ?";
-            } else {
-                botMessage.textContent = "Pouvez-vous donner plus de détails sur votre projet ?";
-                chatStep++;
-            }
+            formData.projectDescription = input;
+            botMessage.textContent = "Est-ce que votre projet concerne plutôt : ⚡ l'électricité, 🔧 la plomberie, ou 🏠 les deux domaines ?";
             chatStep++;
             break;
         case 2:
-            formData.quantity = input;
-            botMessage.textContent = "Pouvez-vous donner plus de détails sur votre projet ?";
+            formData.domain = input;
+            botMessage.textContent = "Pouvez-vous préciser le type de travaux que vous envisagez ?";
             chatStep++;
             break;
         case 3:
-            formData.details = input;
-            botMessage.textContent = "Depuis combien de temps pensez-vous à réaliser ce projet ?";
+            formData.workType = input;
+            botMessage.textContent = "Est-ce un bien existant, une nouvelle construction ou une extension ?";
             chatStep++;
             break;
         case 4:
-            formData.thinkingTime = input;
-            botMessage.textContent = "Pourquoi souhaitez-vous réaliser ce projet ?";
+            formData.propertyType = input;
+            botMessage.textContent = "Quelle est l'urgence de votre projet ?";
             chatStep++;
             break;
         case 5:
-            formData.motivation = input;
-            botMessage.textContent = "Dans combien de temps envisagez-vous de réaliser ce projet ?";
+            formData.urgency = input;
+            botMessage.textContent = "Quel est votre principal objectif avec ce projet ?";
             chatStep++;
             break;
         case 6:
-            formData.timeline = input;
-            if (input.toLowerCase() === "6 mois" || input.toLowerCase() === "1 an") {
-                botMessage.textContent = `Pourquoi dans ${input} ?`;
-            } else {
-                botMessage.textContent = "Quel est votre prénom et nom ?";
-                chatStep++;
-            }
+            formData.mainObjective = input;
+            botMessage.textContent = "Auriez-vous une idée du budget que vous souhaitez y consacrer ?";
             chatStep++;
             break;
         case 7:
-            formData.reason = input;
-            botMessage.textContent = "Quel est votre prénom et nom ?";
+            formData.budget = input;
+            botMessage.textContent = "Merci beaucoup pour ces informations ! 😊 Pour que l'un de nos experts puisse vous proposer une offre personnalisée, pourriez-vous me donner votre **nom et prénom** ?";
             chatStep++;
             break;
         case 8:
             [formData.firstName, formData.lastName] = input.split(' ');
-            botMessage.textContent = "Quelle est votre adresse et ville ?";
+            botMessage.textContent = "Quelle est votre **adresse e-mail** ?";
             chatStep++;
             break;
         case 9:
-            formData.address = input;
-            botMessage.textContent = "Quel est votre numéro de téléphone ?";
+            formData.email = input;
+            botMessage.textContent = "Et votre **numéro de téléphone** ?";
             chatStep++;
             break;
         case 10:
             formData.phone = input;
+            botMessage.textContent = "Enfin, pourriez-vous me donner votre **adresse postale** ou votre **code postal** ?";
+            chatStep++;
+            break;
+        case 11:
+            formData.address = input;
+            botMessage.textContent = "Quels sont les meilleurs moments pour vous joindre ?";
+            chatStep++;
+            break;
+        case 12:
+            formData.availability = input;
+            botMessage.textContent = "Préférez-vous être contacté par téléphone, e-mail ou SMS ?";
+            chatStep++;
+            break;
+        case 13:
+            formData.contactPreference = input;
             finalizeFormData();
             return;
         default:
@@ -107,15 +108,15 @@ function finalizeFormData() {
     document.getElementById('email').value = formData.email;
     document.getElementById('phone').value = formData.phone;
     document.getElementById('subject').value = formData.projectType;
-    document.getElementById('message').value = formData.project;
+    document.getElementById('message').value = formData.projectDescription;
     document.getElementById('project-details').value = formData.details;
-    if (formData.timeline.toLowerCase() === "maintenant") {
+    if (formData.timeline && formData.timeline.toLowerCase() === "maintenant") {
         document.getElementById('now').checked = true;
-    } else if (formData.timeline.toLowerCase() === "6 mois") {
+    } else if (formData.timeline && formData.timeline.toLowerCase() === "6 mois") {
         document.getElementById('six-months').checked = true;
         document.getElementById('reason-text').value = formData.reason;
         document.getElementById('reason').style.display = 'block';
-    } else if (formData.timeline.toLowerCase() === "1 an") {
+    } else if (formData.timeline && formData.timeline.toLowerCase() === "1 an") {
         document.getElementById('one-year').checked = true;
         document.getElementById('reason-text').value = formData.reason;
         document.getElementById('reason').style.display = 'block';
@@ -128,6 +129,11 @@ function finalizeFormData() {
     // Terminer par un message de remerciement
     const finalMessage = document.createElement('div');
     finalMessage.className = 'message bot-message';
-    finalMessage.textContent = `Merci ${formData.firstName} ${formData.lastName}! Un installateur va traiter votre demande dans les 24h. A très bientôt, EDS Énergie Sud.`;
+    finalMessage.textContent = `Merci beaucoup, ${formData.firstName} ${formData.lastName}! 😊 Nous avons bien reçu toutes les informations nécessaires concernant votre projet. Un de nos experts vous contactera sous 24 heures pour discuter des détails et vous fournir une offre personnalisée.
+
+    Nous sommes impatients de pouvoir vous aider à réaliser votre projet d'électricité ou de plomberie. Si vous avez des questions supplémentaires, n'hésitez pas à nous contacter à tout moment. 
+
+    À très bientôt, l'équipe EDS Énergie Sud.`;
     document.getElementById('chatbox-body').appendChild(finalMessage);
 }
+
