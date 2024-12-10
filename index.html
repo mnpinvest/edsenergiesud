@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="chatbox">
+            <div class="chatbox-header">
+                <h2>Chatbox</h2>
+            </div>
+            <div class="chatbox-body" id="chatbox-body">
+                <div class="message bot-message">Bonjour ! Comment puis-je vous aider aujourd'hui ?</div>
+            </div>
+            <div class="chatbox-footer">
+                <input type="text" id="user-input" placeholder="Tapez votre message ici...">
+                <button onclick="sendMessage()">Envoyer</button>
+            </div>
+        </div>
+
+        <div class="contact-form" id="contact-form">
+            <h2>Contactez-nous</h2>
+            <form action="submit_form.php" method="post" enctype="multipart/form-data">
+                <label for="name">Nom</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Numéro de téléphone</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="subject">Sujet</label>
+                <select id="subject" name="subject" required>
+                    <option value="" disabled selected>Choisissez un sujet</option>
+                    <option value="tableau-electrique">Tableau électrique</option>
+                    <option value="automatisme">Automatisme</option>
+                    <option value="eclairage">Éclairage</option>
+                    <option value="photovoltaïque">Photovoltaïque</option>
+                    <option value="climatisation">Climatisation</option>
+                    <option value="pompe-a-chaleur">Pompe à chaleur</option>
+                </select>
+
+                <label for="message">Quel est votre projet ?</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <label for="project-details">Détails du projet</label>
+                <textarea id="project-details" name="project-details" required></textarea>
+
+                <label>Délais du projet</label>
+                <div class="radio-group">
+                    <label><input type="radio" id="now" name="timeline" value="Maintenant" onchange="toggleReasonField()"> Maintenant</label>
+                    <label><input type="radio" id="six-months" name="timeline" value="6 mois" onchange="toggleReasonField()"> 6 mois</label>
+                    <label><input type="radio" id="one-year" name="timeline" value="1 an" onchange="toggleReasonField()"> 1 an</label>
+                </div>
+
+                <div id="reason">
+                    <label for="reason-text">Si 6 mois ou 1 an, précisez pourquoi</label>
+                    <textarea id="reason-text" name="reason"></textarea>
+                </div>
+
+                <label for="file-upload">Télécharger des images</label>
+                <input type="file" id="file-upload" name="file-upload[]" multiple>
+
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
