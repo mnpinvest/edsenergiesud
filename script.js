@@ -1,4 +1,4 @@
- document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('.chatbox-footer button').addEventListener('click', sendMessage);
     document.getElementById('contact-form').style.display = 'none'; // Hide the form initially
 });
