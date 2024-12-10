@@ -9,7 +9,7 @@ body {
 /* Logo */
 .logo-container {
     text-align: center;
-    padding: 20px;
+    padding: 10px 0;
 }
 
 .logo-container img {
@@ -28,18 +28,20 @@ body {
 
 /* Chatbox */
 .chatbox {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    overflow: hidden;
+    background-color: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px; 
+    overflow: hidden; 
+    margin-top: 0; /* Éliminer la marge supérieure */ 
 }
 
 .chatbox-header {
-    background-color: #4CAF50;
+    background-color: #1c0abb;
     color: white;
-    padding: 15px;
     text-align: center;
+    padding: 5px 0;
+    margin-top: 0;
 }
 
 .chatbox-body {
