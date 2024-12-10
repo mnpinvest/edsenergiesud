@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+ document.addEventListener('DOMContentLoaded', (event) => {
     document.querySelector('.chatbox-footer button').addEventListener('click', sendMessage);
     document.getElementById('contact-form').style.display = 'none'; // Hide the form initially
 });
@@ -37,11 +37,6 @@ function handleChatStep(input) {
             botMessage.textContent = "Est-ce que votre projet concerne plutôt : ⚡ l'électricité, 🔧 la plomberie, ou 🏠 les deux domaines ?";
             chatStep++;
             break;
-        case 2:
-            formData.domain = input;
-            botMessage.textContent = "Pouvez-vous préciser le type de travaux que vous envisagez ?";
-            chatStep++;
-            break;
         case 3:
             formData.workType = input;
             botMessage.textContent = "Est-ce un bien existant, une nouvelle construction ou une extension ?";
@@ -50,11 +45,6 @@ function handleChatStep(input) {
         case 4:
             formData.propertyType = input;
             botMessage.textContent = "Quelle est l'urgence de votre projet ?";
-            chatStep++;
-            break;
-        case 5:
-            formData.urgency = input;
-            botMessage.textContent = "Quel est votre principal objectif avec ce projet ?";
             chatStep++;
             break;
         case 6:
@@ -84,12 +74,7 @@ function handleChatStep(input) {
             break;
         case 11:
             formData.address = input;
-            botMessage.textContent = "Quels sont les meilleurs moments pour vous joindre ?";
-            chatStep++;
-            break;
-        case 12:
-            formData.availability = input;
-            botMessage.textContent = "Préférez-vous être contacté par téléphone, e-mail ou SMS ?";
+            botMessage.textContent = "Quels sont les meilleurs moments pour vous joindre ?\n- 10h\n- 14h\n- 16h\n- 18h";
             chatStep++;
             break;
         case 13:
@@ -136,4 +121,3 @@ function finalizeFormData() {
     À très bientôt, l'équipe EDS Énergie Sud.`;
     document.getElementById('chatbox-body').appendChild(finalMessage);
 }
-
